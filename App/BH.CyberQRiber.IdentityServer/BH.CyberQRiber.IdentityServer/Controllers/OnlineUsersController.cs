@@ -46,7 +46,7 @@ namespace BH.CyberQRiber.IdentityServer.Controllers
         }
         
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOnlineUser([FromRoute] int id, [FromBody] OnlineUser onlineUser)
+        public async Task<IActionResult> PutOnlineUser([FromRoute] int id, [FromForm] OnlineUser onlineUser)
         {
             if (!ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace BH.CyberQRiber.IdentityServer.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostOnlineUser([FromBody] OnlineUser onlineUser)
+        public async Task<IActionResult> PostOnlineUser([FromForm]OnlineUser onlineUser)
         {
             if (!ModelState.IsValid)
             {
