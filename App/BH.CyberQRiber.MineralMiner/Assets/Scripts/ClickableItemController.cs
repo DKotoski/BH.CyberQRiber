@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,17 +19,24 @@ public class ClickableItemController : MonoBehaviour
 
     public Item Item;
 
+    public List<Item> itemPool;
+
     private void Start()
     {
         Slider = GetComponent<Slider>();
         RefreshTime = new TimeSpan(RefreshTimeSeconds * 10000000);
-        Click();
+        //  Click();
         Slider.value = SliderValue();
     }
 
     private void Update()
     {
         Slider.value = SliderValue();
+        if (Slider.value == 0)
+        {
+            Item = itemPool.First();
+            itemPool.RemoveAt(0);
+        }
     }
 
     private float SliderValue()
@@ -52,5 +62,18 @@ public class ClickableItemController : MonoBehaviour
 
     public void RevealItem()
     {
+        var coverButton = transform.parent.parent.GetChild(1).gameObject;
+        coverButton.SetActive(true);
+
+        coverButton.transform.GetChild(0).GetComponent<Image>().sprite = Item.Sprite;
+        StartCoroutine(HideButtonAfter(1));
+    }
+
+    public IEnumerator HideButtonAfter(int time)
+    {
+        yield return new WaitForSeconds(time);
+
+        var coverButton = transform.parent.parent.GetChild(1).gameObject;
+        coverButton.SetActive(false);
     }
 }

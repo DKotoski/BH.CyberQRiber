@@ -11,9 +11,20 @@ public class GameController : MonoBehaviour
     public GameObject ClickablePrefab;
     public GameObject canvas;
 
+    public List<Sprite> spriteDictionary;
+
+    public GameController()
+    {
+        itemPool = new List<Item>();
+        ItemPoolGenerator.Sprites = spriteDictionary;
+        GenerateStage();
+        RefreshItemPool();
+    }
+
     // Use this for initialization
     private void Start()
     {
+        ItemPoolGenerator.Sprites = spriteDictionary;
         GenerateStage();
         RefreshItemPool();
     }
@@ -29,11 +40,12 @@ public class GameController : MonoBehaviour
 
     private void RefreshItemPool()
     {
-        itemPool = ItemPoolGenerator.Generate().OrderBy(x => GUID.Generate()).ToList();
+        itemPool.AddRange(ItemPoolGenerator.Generate().OrderBy(x => GUID.Generate()).ToList());
 
         foreach (var clickable in clickables)
         {
             clickable.Item = itemPool.First();
+            clickable.itemPool = itemPool;
             itemPool.RemoveAt(0);
         }
     }

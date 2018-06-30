@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public static class ItemPoolGenerator
 {
     private static int PoolGenerationTryouts = 100;
-    private static Random rnd;
+    private static System.Random rnd;
+    public static List<Sprite> Sprites;
 
     static ItemPoolGenerator()
     {
-        rnd = new Random();
+        rnd = new System.Random();
     }
 
     public static IEnumerable<Item> Generate()
@@ -20,9 +22,9 @@ public static class ItemPoolGenerator
             foreach (var stat in poolStats)
             {
                 var roll = rnd.Next(100);
-                if (roll < stat.DropChance && stat.DropChance != 0)
+                if (roll < stat.DropChance && stat.ItemPoolCount != 0)
                 {
-                    pool.Add(new Item { TypeIdentifier = stat.TypeIdentifier });
+                    pool.Add(new Item { TypeIdentifier = stat.TypeIdentifier, Sprite = Sprites[int.Parse(stat.TypeIdentifier) - 1] });
                     if (stat.ItemPoolCount > 0)
                     {
                         stat.ItemPoolCount--;
@@ -34,9 +36,7 @@ public static class ItemPoolGenerator
         return pool;
     }
 
-    private static IEnumerable<ItemPoolStat> GetItemPoolStats()
-    {
-        return new List<ItemPoolStat>
+    private static List<ItemPoolStat> PlaceHolders = new List<ItemPoolStat>
         {
             new ItemPoolStat
             {
@@ -67,5 +67,9 @@ public static class ItemPoolGenerator
                 ItemPoolCount = 0
             }
         };
+
+    private static IEnumerable<ItemPoolStat> GetItemPoolStats()
+    {
+        return PlaceHolders;
     }
 }
