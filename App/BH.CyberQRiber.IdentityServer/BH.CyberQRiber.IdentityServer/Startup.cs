@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using BH.CyberQRiber.IdentityServer.Models;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace BH.CyberQRiber.IdentityServer
 {
@@ -23,6 +24,11 @@ namespace BH.CyberQRiber.IdentityServer
 
             services.AddDbContext<BHCyberQRiberIdentityServerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("BHCyberQRiberIdentityServerContext")));
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +39,11 @@ namespace BH.CyberQRiber.IdentityServer
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
             app.UseMvc();
         }
     }
