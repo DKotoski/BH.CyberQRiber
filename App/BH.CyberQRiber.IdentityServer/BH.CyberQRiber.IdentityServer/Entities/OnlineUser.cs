@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BH.CyberQRiber.IdentityServer.Entities
+﻿namespace BH.CyberQRiber.IdentityServer.Entities
 {
     public class OnlineUser
     {
