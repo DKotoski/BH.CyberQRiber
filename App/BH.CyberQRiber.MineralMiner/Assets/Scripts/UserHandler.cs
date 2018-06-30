@@ -59,7 +59,7 @@ public class UserHandler : MonoBehaviour
     {
         var route = APIAddress + $"/api/onlineusers/{LoggedInId}";
         UnityWebRequest www = UnityWebRequest.Delete(route);
-        
+
         yield return www.SendWebRequest();
 
         if (www.isNetworkError || www.isHttpError)
