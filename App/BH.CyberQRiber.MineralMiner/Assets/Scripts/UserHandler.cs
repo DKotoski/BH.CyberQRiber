@@ -5,8 +5,8 @@ using UnityEngine.Networking;
 
 public class UserHandler : MonoBehaviour {
 
-    private readonly string APIAddress = "http://localhost:somethng";
-    private readonly string Username = "username";
+    private readonly string APIAddress = "http://localhost:56492";
+    private readonly string Username = "username"; //TODO: placeholders make configuration
     private readonly string BlockchainAddress = "address";
     private int LoggedInId;
 	// Use this for initialization
@@ -43,7 +43,7 @@ public class UserHandler : MonoBehaviour {
 
     IEnumerator LogOutUser()
     {
-        var request = UnityWebRequest.Delete(APIAddress + "api/OnlineUsers/5");
+        var request = UnityWebRequest.Delete(APIAddress + $"api/OnlineUsers/{LoggedInId}");
         var response = request.SendWebRequest();
         yield return response;
 
