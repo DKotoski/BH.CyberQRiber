@@ -36,6 +36,7 @@ public class ClickableItemController : MonoBehaviour
         {
             Item = itemPool.First();
             itemPool.RemoveAt(0);
+            GameController.itemInventory.Add(Item);
         }
     }
 

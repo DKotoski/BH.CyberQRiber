@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
 
     public List<Sprite> spriteDictionary;
 
+    public static List<Item> itemInventory new List<Item>();
+
     public GameController()
     {
         itemPool = new List<Item>();
