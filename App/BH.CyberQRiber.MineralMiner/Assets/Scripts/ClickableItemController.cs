@@ -42,7 +42,15 @@ public class ClickableItemController : MonoBehaviour
 
     public void Click()
     {
-        LastClicked = DateTime.Now;
-        PlannedRefresh = LastClicked + RefreshTime;
+        if (CanBeClicked)
+        {
+            LastClicked = DateTime.Now;
+            PlannedRefresh = LastClicked + RefreshTime;
+            RevealItem();
+        }
+    }
+
+    public void RevealItem()
+    {
     }
 }
