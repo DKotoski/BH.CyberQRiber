@@ -14,6 +14,7 @@ public class ClickableItemController : MonoBehaviour
 
     public bool CanBeClicked { get { return SliderValue() <= 0; } }
 
+    public Item Item;
 
     void Start()
     {
