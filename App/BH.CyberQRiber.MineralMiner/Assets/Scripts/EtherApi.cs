@@ -1,13 +1,10 @@
 ﻿using Nethereum.Contracts;
 using Nethereum.Signer;
 using Nethereum.Web3;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 public class EtherApi
 {
-
     private readonly string abi = "[{'constant':true,'inputs':[],'name':'showMeWhatYouGot','outputs':[{'name':'','type':'string'}],'payable':false,'stateMutability':'pure','type':'function'},{'onstant':true,'inputs':[{'name':'_contestEntry','type':'string'}],'name':'enterContest','outputs':[{'name':'','type':'string'}],'payable':false,'stateMutability':'view','type':'function'},{'inputs':[{'name':'_contestResult','type':'string'}],'payable':false,'stateMutability':'nonpayable','type':'constructor'}]";
     private readonly string contractAddress = "0x123402bea5b53cb35bdd1e7675349e0f38bbd669";
     private string privateKey;
@@ -19,7 +16,7 @@ public class EtherApi
         this.url = url;
         this.web3 = new Web3(url);
         this.address = EthECKey.GetPublicAddress(privateKey); //could do checksum
-       // var testSometing = web3.Eth.get;
+                                                              // var testSometing = web3.Eth.get;
 
         this.contract = web3.Eth.GetContract(abi, contractAddress);
     }
@@ -43,5 +40,4 @@ public class EtherApi
         var result = await function.CallAsync<string>(address).ConfigureAwait(false);
         return result;
     }
-
 }

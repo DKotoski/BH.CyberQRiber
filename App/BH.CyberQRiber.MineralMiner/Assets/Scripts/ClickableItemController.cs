@@ -16,27 +16,24 @@ public class ClickableItemController : MonoBehaviour
 
     public Item Item;
 
-    void Start()
+    private void Start()
     {
         Slider = GetComponent<Slider>();
-        RefreshTime = new TimeSpan(RefreshTimeSeconds*10000000);
+        RefreshTime = new TimeSpan(RefreshTimeSeconds * 10000000);
         Click();
         Slider.value = SliderValue();
-
     }
 
-    void Update()
+    private void Update()
     {
         Slider.value = SliderValue();
     }
 
-    float SliderValue()
+    private float SliderValue()
     {
-
-
         if (LastClicked != null && PlannedRefresh != null)
-        { 
-            var res = (PlannedRefresh.Ticks - DateTime.Now.Ticks)/ (float)RefreshTime.Ticks;
+        {
+            var res = (PlannedRefresh.Ticks - DateTime.Now.Ticks) / (float)RefreshTime.Ticks;
             if (res < 0) return 0;
             return res;
         }

@@ -4,4 +4,3 @@
     public int DropChance { get; set; }
     public int ItemPoolCount { get; set; }
 }
-
